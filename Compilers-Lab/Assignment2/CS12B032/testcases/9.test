@@ -1,0 +1,18 @@
+Table t1;
+Row r1, r2, r3;
+Column c1, c2, c3, c4;
+c1.addText("Countries");
+c2.addText("Capitals");
+c3.addText("Population");
+r1.addColumn(c1);r1.addColumn(c2);r1.addColumn(c3);r1.addColumn(c4);
+c1.addText("USA");
+c2.addText("Washington D.C.");
+c3.addText("309 million");
+r2.addColumn(c1);r2.addColumn(c2);r2.addColumn(c3);r2.addColumn(c4);
+c1.addText("Sweden");
+c2.addText("Stockholm");
+c3.addText("9 million");
+c4.addText("Swedish");
+r3.addColumn(c1);r3.addColumn(c2);r3.addColumn(c3);r3.addColumn(c4);
+t1.addRow(r1);t1.addRow(r2);t1.addRow(r3);
+t1.show();

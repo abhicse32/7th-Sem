@@ -1,0 +1,70 @@
+#!/usr/bin/env python
+__author__ = 'abhisheky'
+import sys,os
+from itertools import izip
+from re import search
+
+def getAnsFile(fileList, inFile):
+    for file_ in fileList:
+        str_= search(r'[^\w+]*_.*',file_).group()[1:]
+        if  str_== inFile:
+            return file_
+
+def evaluateSSSP():
+    inputDir= "public/input/"
+    ansDir= "public/sssp/"
+    outFileName= "ssspOut.txt"
+    inFiles= os.listdir(inputDir)
+    ansFiles=os.listdir(ansDir)
+    for file in inFiles:
+        filePath= os.path.join(inputDir, file)
+        ansFilePath= os.path.join(ansDir,getAnsFile(ansFiles,file))
+        print "running on %s...."%(file),
+        os.system("./sssp "+filePath+" > "+outFileName)
+        counter= 1
+        flag= False
+        with open(ansFilePath,"r") as ansPtr, open(outFileName,"r") as outPtr:
+            for outLine, ansLine in izip(outPtr,ansPtr):
+                if outLine.strip().split() != ansLine.strip().split():
+                    print "  Error at Line No:",counter
+                    flag= True
+                    break
+                counter= counter +1
+        if flag==False:
+            print "passed"
+        else:
+            print "failed"
+    os.system("rm "+outFileName)
+
+def evaluateDFS():
+    inputDir= "public/input/"
+    ansDir= "public/dfs/"
+    outFileName= "dfsOut.txt"
+    inFiles= os.listdir(inputDir)
+    ansFiles=os.listdir(ansDir)
+    for file in inFiles:
+        filePath= os.path.join(inputDir, file)
+        ansFilePath= os.path.join(ansDir,getAnsFile(ansFiles,file))
+        print "running on %s...."%(file),
+        os.system("./dfs "+filePath+" > "+outFileName)
+        counter= 1
+        flag= False
+        with open(ansFilePath,"r") as ansPtr, open(outFileName,"r") as outPtr:
+            for outLine, ansLine in izip(outPtr,ansPtr):
+                if outLine.strip() != ansLine.strip():
+                    print "  Error at Line No:",counter
+                    flag= True
+                    break
+                counter= counter +1
+        if flag==False:
+            print "passed"
+        else:
+            print "failed"
+    os.system("rm "+outFileName)
+
+
+if __name__=='__main__':
+    #os.system("make clean")
+    os.system("make")
+    #evaluateDFS()
+    evaluateSSSP()

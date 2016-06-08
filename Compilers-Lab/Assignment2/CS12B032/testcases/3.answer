@@ -1,0 +1,22 @@
+<table border="2" bgcolor="green">
+<tr>
+<td bgcolor="skyblue" align="center">Roll No</td>
+<td bgcolor="skyblue" align="center">Name</td>
+<td bgcolor="skyblue" align="center">Email ids</td>
+</tr>
+<tr>
+<td bgcolor="skyblue" align="center">CS14M051</td>
+<td bgcolor="skyblue" align="center">Prashant</td>
+<td bgcolor="skyblue" align="center">abc@cba.com</td>
+</tr>
+<tr>
+<td bgcolor="skyblue" align="center">CS14M052</td>
+<td bgcolor="skyblue" align="center">Pradip</td>
+<td bgcolor="skyblue" align="center">xyz@zyx.com</td>
+</tr>
+<tr>
+<td bgcolor="skyblue" align="center">CS14M053</td>
+<td bgcolor="skyblue" align="center">Madhur</td>
+<td bgcolor="skyblue" align="center">pqr@rqp.com</td>
+</tr>
+</table>

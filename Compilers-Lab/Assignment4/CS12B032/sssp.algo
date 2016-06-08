@@ -1,0 +1,84 @@
+locImport<list.h>
+stdImport<stdlib.h, string.h,stdio.h>
+stdImport<stdbool.h>
+Macro MAX_VAL <<~ 999999999
+
+Void SSSP[Integer srcNode, NodeList adjList, Integer nNodes]%
+	Integer^ distanceArray <= allocate Integer<nNodes>?
+	pQueue^ priorityQueue <= allocate pQueue<nNodes>?
+	Integer^ visited <= allocate Integer<nNodes>?
+	Node iterator?
+	Integer i, size<=0, k?
+	pQueue node?
+	Integer updatedDistance, currentNode?
+
+	for{i < (0, nNodes,1)}$
+    	priorityQueue<i>.nodeVal <= MAX_VAL?
+    	distanceArray<i> <= MAX_VAL ?       
+	$
+
+	priorityQueue<size>.nodeVal <= 0?
+	priorityQueue<size>.nodeId <= srcNode?
+	distanceArray<srcNode> <= 0?
+	visited<srcNode> <= 1?
+	size <= size + 1?
+
+	while{(size > 0)}$
+			currentNode <= extractMin[priorityQueue, size--]? 
+			iterator <= adjList<currentNode> ~>> next?
+			while{(iterator != null)}$
+				updatedDistance <= iterator ~>> dist + distanceArray<currentNode>?
+
+				if{( distanceArray<iterator~>>id> > updatedDistance)}$
+					distanceArray<iterator~>>id > <= updatedDistance?
+				$
+
+				node.nodeId <= iterator ~>> id?
+				node.nodeVal <= distanceArray<iterator~>>id>?
+
+				k <= checkIfVisited[priorityQueue, iterator ~>>id, size]?
+				if{(0 > k) && (!visited<node.nodeId>)}$
+					insert[priorityQueue,node, size++]?
+				    visited <node.nodeId> <= 1?
+				$
+				else$
+					decreaseKey[priorityQueue, k, node]?
+				$
+				iterator <= iterator ~>>next?
+			$
+			minHeapify[priorityQueue, 0, size]?
+		$
+
+		for{i < (0, nNodes, 1)}$
+			print ["%d %d\n",i,distanceArray<i>]?
+		$
+%
+
+Void main[Integer argc,Character^^ argv]%
+	   FileReader fr <= fopen[argv<1>,"r"]?
+
+	  if {(fr == null)}$
+	 	print ["ERROR"]?
+	 	exit[1]?
+	  $
+
+	 Integer nNodes, nEdges?
+	 if {(fscanf[fr,"%d%d",nNodes, nEdges] == -1)}$
+	  	print ["ERROR"]?
+	  	exit[1]?
+	  $
+
+	Integer srcNode, destNode, dist?
+	Integer i,j,k?
+	NodeList nodeList?
+	nodeList <= allocate NodeList <nNodes>?
+	for {i < (0,nNodes,1)}$
+		nodeList<i> <= getNewNode[i,0]?
+	$
+
+	while {(fscanf[fr,"%d%d%d",srcNode,destNode,dist] != EOF)}$
+		nodeList<srcNode> <= append[nodeList<srcNode>,destNode,dist]?
+	$
+	SSSP[0,nodeList,nNodes]?
+
+%

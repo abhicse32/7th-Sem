@@ -1,0 +1,67 @@
+locImport<list.h>
+stdImport<stdlib.h, string.h,stdio.h>
+stdImport<stdbool.h>
+Macro MAX_VAL <<~ 999999999
+
+Void DFS[Integer srcNode, NodeList adList, Integer nNodes]%
+	Integer^ visited <= allocate Integer<nNodes>?
+	Integer^ visitOrder <= allocate Integer<nNodes>?
+	Stack stack <= getNewNode[srcNode, 0]?
+	Integer counter<=0, currentNode,i?
+	Boolean flag? 
+
+	visited<srcNode> <= 1?
+	visitOrder<counter++> <= srcNode?
+
+	while{(nNodes > counter) &&  (stack != null)}$
+		currentNode <= stack ~>> id?
+		Node iterator <= adList<currentNode> ~>> next?
+		flag <= FALSE ?
+		while{(iterator != null)}$
+			if{(!visited<iterator~>>id>)}$
+				currentNode <= iterator ~>>id?
+				visitOrder<counter++> <= currentNode?
+				visited<currentNode> <= 1?
+				stack <= prepend[stack,iterator~>>id,0]?
+				flag <= TRUE?
+				break?
+			$
+			iterator<= iterator ~>> next?
+		$
+		if{(!flag)}$
+			stack <= removeFirst[stack]?
+		$
+	$
+	for{i < (0,counter,1)}$
+		print ["%d\n",visitOrder<i>]?
+	$
+%
+
+Void main[Integer argc,Character^^ argv]%
+	   FileReader fr <= fopen[argv<1>,"r"]?
+
+	  if {(fr == null)}$
+	 	print ["ERROR"]?
+	 	exit[1]?
+	  $
+
+	 Integer nNodes, nEdges?
+	 if {(fscanf[fr,"%d%d",nNodes, nEdges] == -1)}$
+	  	print ["ERROR"]?
+	  	exit[1]?
+	  $
+
+	Integer srcNode, destNode, dist?
+	Integer i,j,k?
+	NodeList nodeList?
+	nodeList <= allocate NodeList <nNodes>?
+	for {i < (0,nNodes,1)}$
+		nodeList<i> <= getNewNode[i,0]?
+	$
+
+	while {(fscanf[fr,"%d%d%d",srcNode,destNode,dist] != EOF)}$
+		nodeList<srcNode> <= append[nodeList<srcNode>,destNode,dist]?
+	$
+	DFS[0,nodeList,nNodes]?
+
+%

@@ -1,0 +1,21 @@
+graph myGraph{
+	pradip -- sachin[label=friendof]  ;
+	pradip -- ajay[label=friendof]  ;
+	ramesh -- ajay[label=friendof]  ;
+	pradip -- prashant[label=roommateof]  ;
+	pradip -- arjun[label=roommateof]  ;
+	pradip -- krishna[label=roommateof]  ;
+	prashant -- arjun[label=roommateof]  ;
+	prashant -- krishna[label=roommateof]  ;
+	arjun -- krishna[label=roommateof]  ;
+	bahubali -- katappa[label=roommateof]  ;
+	pradip -- prashant[label=classmateof]  ;
+	pradip -- bahubali[label=classmateof]  ;
+	pradip -- raja[label=classmateof]  ;
+	sachin -- arjun[label=classmateof]  ;
+	prashant -- bahubali[label=classmateof]  ;
+	prashant -- raja[label=classmateof]  ;
+	bahubali -- raja[label=classmateof]  ;
+	pawan -- pandu[label=classmateof]  ;
+	abhi -- ash[label=classmateof]  ;
+}

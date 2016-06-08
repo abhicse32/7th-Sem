@@ -1,0 +1,28 @@
+<table border="2" width="400">
+<tr> 
+<td rowspan="3" align="center" bgcolor="skyblue">Production</td>
+<td>Raha Mutisya</td>
+<td>1493</td>
+</tr>
+<tr>
+<td>Shalom Buraka</td>
+<td>3829</td>
+</tr>
+<tr>
+<td>Brandy Davis</td>
+<td>0283</td>
+</tr>
+<tr>
+<td rowspan="3" align="center" bgcolor="skyblue">Sales</td>
+<td>Claire Horne</td>
+<td>4827</td>
+</tr>
+<tr>
+<td>Bruce Eckel</td>
+<td>7246</td>
+</tr>
+<tr>
+<td>Danny Zeman</td>
+<td>5689</td>
+</tr>
+</table>

@@ -1,0 +1,26 @@
+Table t1;
+Row r1, r2, r3, r4;
+Column c1, c2, c3;
+
+c1.addText("Column 1 heading");
+c2.addText("Column 2 heading");
+c3.addText("Column 3 heading");
+r1.addColumn(c1);r1.addColumn(c2);r1.addColumn(c3);
+
+c1.addText("Row 2, cell 1");
+c2.colspan("2");
+c2.addText("Row 2, cell 2, also spanning Row 2, cell 3");
+r2.addColumn(c1);r2.addColumn(c2);
+
+c1.rowspan("2");
+c1.addText("Row 3, cell 1, also spanning Row 4, cell 1");
+c2.addText("Row 3, cell 2");
+c3.addText("Row 3, cell 3");
+r3.addColumn(c1);r3.addColumn(c2);
+
+c2.addText("Row 4, cell 2");
+c3.addText("Row 4, cell 3");
+r4.addColumn(c2);
+
+t1.addRow(r1);t1.addRow(r2);t1.addRow(r3);t1.addRow(r4);
+t1.show();

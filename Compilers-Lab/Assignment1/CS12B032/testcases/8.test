@@ -1,0 +1,27 @@
+
+pradip friendof sachin
+ramesh friendof ajay
+pradip friendof ajay
+
+prashant roommateof pradip
+arjun roommateof pradip
+bahubali roommateof katappa
+arjun roommateof krishna
+
+prashant classmateof pradip
+pawan classmateof pandu
+sachin classmateof arjun
+abhi classmateof ash
+bahubali classmateof pradip
+
+
+
+
+
+
+
+if arjun classmateof sachin
+ foreach $x friendof pradip
+    $x roommateof bahubali
+ endforeach
+endif

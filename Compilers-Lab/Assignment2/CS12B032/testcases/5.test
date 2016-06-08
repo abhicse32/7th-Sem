@@ -1,0 +1,15 @@
+Table t1, t2;
+Row r1, r2, r3;
+Column c1, c2, c3;
+t1.border("5");
+c1.addText("First cell in first table. The cell to the right has the second table in it.");
+t2.border("3");
+c3.addText("nested table");
+r2.addColumn(c3);
+c3.addText("nested table");
+r3.addColumn(c3);
+t2.addRow(r2);t2.addRow(r3);
+c2.addTable(t2);
+r1.addColumn(c1);r1.addColumn(c2);
+t1.addRow(r1);
+t1.show();

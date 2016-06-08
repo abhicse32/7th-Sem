@@ -1,0 +1,48 @@
+pradip friendof sachin
+prashant friendof yogendra
+sachin friendof ajay
+ajay friendof pradip
+govinda friendof salman
+mohan friendof suresh
+
+
+prashant roommateof pradip
+ajay roommateof pandu
+yash roommateof madhur
+srikant roommateof mohan
+pradip roommateof arjun
+ramesh roommateof manoj
+bahubali roommateof katappa
+
+
+prashant classmateof pradip
+pawan classmateof pandu
+pandu classmateof madhur
+sachin classmateof arjun
+manas classmateof jyoti
+abhi classmateof ash
+bahubali classmateof pradip
+
+foreach $x classmateof pradip
+	foreach $y classmateof pandu
+	   if pawan classmateof pandu
+	     	pawan roommateof ajay
+	   endif
+	   foreach $z classmateof $y
+	  		$x roommateof $y
+	  		$x friendof $z
+	  		if $z classmateof pandu
+	  			rohan classmateof arjun
+	  		endif 
+	   endforeach
+	   endforeach
+	 if $x roommateof ram
+	  	$x classmateof rohan
+	 endif
+endforeach
+
+mohan classmateof rakesh
+
+foreach $x classmateof madhur
+	$x classmateof $y
+endforeach

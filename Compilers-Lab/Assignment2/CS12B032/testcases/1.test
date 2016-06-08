@@ -1,0 +1,13 @@
+Table t1;
+Row r1, r2;
+Column c1, c2, c3;
+c1.addText("one, one");
+c2.addText("one, two");
+c3.addText("one,three");
+r1.addColumn(c1); r1.addColumn(c2); r1.addColumn(c3);
+c1.addText("two, one");
+c2.addText("two, two");
+c3.addText("two,three");
+r2.addColumn(c1); r2.addColumn(c2); r2.addColumn(c3);
+t1.addRow(r1); t1.addRow(r2);
+t1.show();

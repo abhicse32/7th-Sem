@@ -1,0 +1,56 @@
+locImport<list.h>
+stdImport<stdlib.h, string.h,stdio.h>
+stdImport<stdbool.h>
+
+Void directedColoring[Integer srcNode, NodeList adList, Integer nNodes]%
+	Integer^ nodeColors <= allocate Integer<nNodes>?
+	Integer gColor <= 0, maxColor, currNeighbor, i?
+	Node iterator?
+
+	for{i < (0, nNodes,1)}$
+		maxColor <= 0?
+		iterator <= adList<i> ~>> next?
+		while{(iterator != null)}$
+			currNeighbor <= iterator ~>> id?
+			if{(nodeColors<currNeighbor> != 0 ) && (nodeColors<currNeighbor> > maxColor)}$
+				maxColor <= nodeColors<currNeighbor>?
+			$
+
+			iterator <= iterator ~>> next?
+		$
+		nodeColors<i> <= maxColor+1?
+		if{(nodeColors<i> > gColor)}$
+			gColor <= nodeColors<i> ? 
+		$
+	$
+	print ["%d\n",gColor]?
+%
+
+Void main[Integer argc,Character^^ argv]%
+	   FileReader fr <= fopen[argv<1>,"r"]?
+
+	  if {(fr == null)}$
+	 	print ["ERROR"]?
+	 	exit[1]?
+	  $
+
+	 Integer nNodes, nEdges?
+	 if {(fscanf[fr,"%d%d",nNodes, nEdges] == -1)}$
+	  	print ["ERROR"]?
+	  	exit[1]?
+	  $
+
+	Integer srcNode, destNode, dist?
+	Integer i,j,k?
+	NodeList nodeList?
+	nodeList <= allocate NodeList <nNodes>?
+	for {i < (0,nNodes,1)}$
+		nodeList<i> <= getNewNode[i,0]?
+	$
+
+	while {(fscanf[fr,"%d%d%d",srcNode,destNode,dist] != EOF)}$
+		nodeList<srcNode> <= append[nodeList<srcNode>,destNode,dist]?
+	$
+	directedColoring[0,nodeList,nNodes]?
+
+%
