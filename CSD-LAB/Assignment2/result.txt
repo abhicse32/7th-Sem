@@ -1,0 +1,64 @@
+since block-size is 4 hence block-offset will require max 2-bits
+number of sets is 1, so all the read and write operations will
+  access the blocks in this set and hence required set bits=0
+so, tag-bits = 32- (nSetBits+ nOffsetBits)= 32-(0+2)= 30
+
+	since, most significant 28-bits in all the addresses in this example are 0s
+offset-bits= 2 LSBs and tag-bits= 2 MSBs, in last 4 LSBs of each address
+
+representing each address in only 4-bits.
+
+	there are 4-leaf nodes(blocks) and 3-internal node and hence 3 direction-bits in tree
+for simplicity, we're representing these bits as a tuple of 3 values (left-node bit, root-bit, and right-node-bit)/ unchanged if the state doesn't change after the operation
+we're showing the state of the tree before and after every R/W operation
+								
+								 	before(R/W) operation 		 hit/miss				after(R/W) operation
+0xb774c0d2: W 0xb => 1011    ->   		(0, 0, 0)   			compulsory miss 			(1, 1, 0)
+0xb774f7c0: W 0x8 => 1000    ->         (1, 1, 0)				hit							unchanged
+0xb774f7c3: W 0x4 => 0100    -> 		unchanged				compulsory miss             (1, 0, 1)
+0xb774f7c4: W 0xe => 1110    -> 		(1, 0, 1) 				compulsory miss 			(0, 1, 1)
+0xb774f7c5: W 0xc => 1100    -> 		(0, 1, 1)    			hit 						unchanged
+0xb774f7c9: W 0xa => 1010	 -> 		unchanged               hit 						(1, 1, 1)
+0xb77637a8: R 0xc => 1100    -> 		(1, 1, 1)      			hit 						(0, 1, 1)
+0xb77637ab: R 0xd => 1101    -> 		(0, 1, 1)    			hit 						unchanged
+0xb774f7d4: W 0x4 => 0100    ->         unchanged 				hit 						(0, 0, 1)
+0xb774f7d9: W 0x1 => 0001    ->         (0, 0, 1)				conflict-miss   			(1, 1, 1)
+0xb774f7df: R 0x4 => 0100	 -> 		(1, 1, 1)				hit 						(1, 0, 1)
+0xb774f7ea: W 0xf => 1111    -> 		(1, 0, 1)				hit  						(0, 1, 1)
+0xb774f7f8: R 0xe => 1110    -> 		(0, 1, 1)               hit 						unchanged
+0xb774f800: W 0x4 => 0100	 -> 		unchanged 				hit 						(0, 0, 1)
+0xb774f806: W 0xc => 1100	 -> 		(0, 0, 1)               hit 						(0, 1, 1)             
+0xb774f819: W 0x4 => 0100	 -> 		(0, 1, 1)               hit 						(0, 0, 1)
+
+finally after all the operations finish: block from left to right contain tag-numbers: 0, 3, 1, 2 respectively
+so total conflict misses= 1, conflict miss-rate: 1/16 = 0.0625  
+
+
+output on running the program: 
+
+abhisheky@abhishek ~/Documents/7thSem/CSD/LAB/Assignment2 $ ./main -s 16 -l 4 -a 4
+
+CacheSize: 16,  BlockSize: 4, associativity: 4
+Number of Sets: 1,  number of Blocks: 4
+required set bits: 0, required offset bits: 2
+
+tagNumber: 2  setNumber: 0  compulsory-miss
+tagNumber: 2  setNumber: 0  hit
+tagNumber: 1  setNumber: 0  compulsory-miss
+tagNumber: 3  setNumber: 0  compulsory-miss
+tagNumber: 3  setNumber: 0  hit
+tagNumber: 2  setNumber: 0  hit
+tagNumber: 3  setNumber: 0  hit
+tagNumber: 3  setNumber: 0  hit
+tagNumber: 1  setNumber: 0  hit
+tagNumber: 0  setNumber: 0  conflict-miss
+tagNumber: 1  setNumber: 0  hit
+tagNumber: 3  setNumber: 0  hit
+tagNumber: 3  setNumber: 0  hit
+tagNumber: 1  setNumber: 0  hit
+tagNumber: 3  setNumber: 0  hit
+tagNumber: 1  setNumber: 0  hit
+total memory accesse: 16
+total misses:4   total conflict misses:1
+total missRate:0.25  conflict miss rate:0.0625
+

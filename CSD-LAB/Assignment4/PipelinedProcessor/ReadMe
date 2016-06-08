@@ -1,0 +1,13 @@
+we have enclosed 3 test cases.
+
+1. "test1.xls" file contain assembly code without any stalls.
+2. "test2.xls" file contains assembly code with RAW hazards.
+3. "test3.xls" file contains assembly code control hazards.
+
+Corresponding machine language programs are stored in respective ".b" files.
+
+For LOAD/STORE instruction, out of 2 byte long instruction, first 4 bits are used for opcode, next 4 bits for destination/source register address and next 4 bits for source/destination. last 4 bits are ignored.
+
+For JMP instruction we consider only first 8 bits. First 4 for opcode and next 4 bits for offset.
+
+For above test cases we haven't considered BEQZ insturction.
