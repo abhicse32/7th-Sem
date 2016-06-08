@@ -1,5 +1,0 @@
-superscalarprocessor.CommonDataBus
-superscalarprocessor.Result$CommonDataBus
-superscalarprocessor.result
-superscalarprocessor.result$CommonDataBus
-superscalarprocessor.Result
